@@ -1,10 +1,10 @@
 let listaAmigos = [];
+let listaElegidos = [];
 
 
 function agregarAmigo() {
     let amigos = document.getElementById('amigo').value;
-    console.log(listaAmigos);
-    if (amigos == '' ){
+    if (amigos == ''){
         alert('Digite un nombre correcto');
     } else {
         listaAmigos.push(amigos); 
@@ -12,19 +12,30 @@ function agregarAmigo() {
         let elementoLista = document.createElement("li");
         elementoLista.innerHTML = amigos;
         lista.appendChild(elementoLista);
-    } return;
+    }return ;
 }
 
 
 function sortearAmigos(){
-
     if (listaAmigos.length != " " ){
         let resultado = document.getElementById('resultado');
         let numeroAmigo = Math.floor(Math.random()*listaAmigos.length);
         const elementoResultado = document.createElement("li");
         elementoResultado.innerHTML = `El amigo secreto sorteado es ${listaAmigos[numeroAmigo]}`;
-        resultado.appendChild(elementoResultado);
+        if (listaElegidos.includes(numeroAmigo)){
+            listaAmigos.splice(numeroAmigo);
+            //alert("El amigo secreto ya fue elegido!!")
+        } else{
+            resultado.appendChild(elementoResultado)
+            listaElegidos.push(numeroAmigo);
+        }     
     } return;
+}
+
+
+function limpiarAmigo(){
+    let limpiar = document.getElementById('resultado');
+    limpiar.innerHTML = " ";
 }
 
 
